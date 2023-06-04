@@ -1,24 +1,27 @@
-// Copyright 2021 NNTU-CS
 #include  "bst.h"
 
 BST<std::string> makeTree(const char* filename) {
+  BST<std::string> tree;
   std::ifstream file(filename);
-  if (!file.is_open()) {
-    throw std::string("Unable to open file!");
+  if (!file) {
+    std::cout << "File error!" << std::endl;
+    return tree;
   }
-  std::string word = "";
-  BST<std::string> bst;
   while (!file.eof()) {
-    word = "";
-    while (1) {
-      char symbol = file.get();
-      if ((symbol >= 65 && symbol <= 90) || (symbol >= 97 && symbol <= 122)) {
-        word += tolower(symbol);
+    char ch;
+    std::string str;
+    while (file.get(ch)) {
+      if (ch >= 'A' && ch <= 'Z') {
+        ch += 32;
+      }
+      if (ch >= 'a' && ch <= 'z') {
+        str += ch;
       } else {
-        break;
+        tree.add(str);
+        str = "";
       }
     }
-    bst.AddValue(word);
   }
-  return bst;
+  file.close();
+  return tree;
 }
