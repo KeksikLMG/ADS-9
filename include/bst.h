@@ -1,5 +1,7 @@
+// Copyright 2021 NNTU-CS
 #ifndef INCLUDE_BST_H_
 #define INCLUDE_BST_H_
+
 template<typename T>
 class BST {
  public:
@@ -13,6 +15,7 @@ class BST {
   int depth() {
     return getDepth(rootNode) - 1;
   }
+
  private:
   struct Node {
     Node() :count(0), leftNode(nullptr), rightNode(nullptr) {}
@@ -39,6 +42,7 @@ class BST {
     }
     return rootNode;
   }
+
   int searchNode(Node* root, const T& value) {
     if (root == nullptr) {
       return 0;
@@ -51,6 +55,7 @@ class BST {
     }
     return 0;
   }
+
   int getDepth(Node* rootNode) {
     if (!rootNode) {
       return 0;
